@@ -1,7 +1,7 @@
-package com.example.helloworld.cli;
+package com.bryobone.graben.cli;
 
-import com.example.helloworld.HelloWorldConfiguration;
-import com.example.helloworld.core.Template;
+import com.bryobone.graben.HelloWorldConfiguration;
+import com.bryobone.graben.core.Template;
 import com.google.common.base.Optional;
 import io.dropwizard.cli.ConfiguredCommand;
 import io.dropwizard.setup.Bootstrap;

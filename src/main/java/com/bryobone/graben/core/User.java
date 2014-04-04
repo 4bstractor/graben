@@ -1,4 +1,4 @@
-package com.example.helloworld.core;
+package com.bryobone.graben.core;
 
 public class User {
     private final String name;

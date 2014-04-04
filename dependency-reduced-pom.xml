@@ -55,7 +55,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>com.example.helloworld.HelloWorldApplication</mainClass>
+                  <mainClass>com.bryobone.graben.HelloWorldApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>

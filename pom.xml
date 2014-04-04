@@ -141,7 +141,7 @@
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.example.helloworld.HelloWorldApplication</mainClass>
+                                    <mainClass>com.bryobone.graben.HelloWorldApplication</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -150,7 +150,7 @@
             </plugin>
             <plugin>
                 <!-- You'll probably want to remove this for your project. I'm just using it here
-                     so that dropwizard-example doesn't get deployed as a library. -->
+                     so that dropwizard-bryobone doesn't get deployed as a library. -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>2.7</version>

@@ -1,12 +1,12 @@
-package com.example.helloworld;
+package com.bryobone.graben;
 
-import com.example.helloworld.auth.ExampleAuthenticator;
-import com.example.helloworld.cli.RenderCommand;
-import com.example.helloworld.core.Person;
-import com.example.helloworld.core.Template;
-import com.example.helloworld.db.PersonDAO;
-import com.example.helloworld.health.TemplateHealthCheck;
-import com.example.helloworld.resources.*;
+import com.bryobone.graben.auth.ExampleAuthenticator;
+import com.bryobone.graben.cli.RenderCommand;
+import com.bryobone.graben.core.Person;
+import com.bryobone.graben.core.Template;
+import com.bryobone.graben.db.PersonDAO;
+import com.bryobone.graben.health.TemplateHealthCheck;
+import com.bryobone.graben.resources.*;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.auth.basic.BasicAuthProvider;

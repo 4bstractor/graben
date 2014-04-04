@@ -1,8 +1,8 @@
-package com.example.helloworld.resources;
+package com.bryobone.graben.resources;
 
-import com.example.helloworld.core.Person;
-import com.example.helloworld.db.PersonDAO;
-import com.example.helloworld.views.PersonView;
+import com.bryobone.graben.core.Person;
+import com.bryobone.graben.db.PersonDAO;
+import com.bryobone.graben.views.PersonView;
 import com.google.common.base.Optional;
 import com.sun.jersey.api.NotFoundException;
 import io.dropwizard.hibernate.UnitOfWork;

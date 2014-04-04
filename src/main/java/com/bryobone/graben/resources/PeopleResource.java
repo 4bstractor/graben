@@ -1,7 +1,7 @@
-package com.example.helloworld.resources;
+package com.bryobone.graben.resources;
 
-import com.example.helloworld.core.Person;
-import com.example.helloworld.db.PersonDAO;
+import com.bryobone.graben.core.Person;
+import com.bryobone.graben.db.PersonDAO;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.GET;

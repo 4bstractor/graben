@@ -1,8 +1,8 @@
-package com.example.helloworld.resources;
+package com.bryobone.graben.resources;
 
 import com.codahale.metrics.annotation.Timed;
-import com.example.helloworld.core.Saying;
-import com.example.helloworld.core.Template;
+import com.bryobone.graben.core.Saying;
+import com.bryobone.graben.core.Template;
 import com.google.common.base.Optional;
 import io.dropwizard.jersey.caching.CacheControl;
 import org.slf4j.Logger;

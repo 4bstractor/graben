@@ -1,6 +1,6 @@
-package com.example.helloworld;
+package com.bryobone.graben;
 
-import com.example.helloworld.core.Template;
+import com.bryobone.graben.core.Template;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;

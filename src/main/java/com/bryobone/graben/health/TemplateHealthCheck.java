@@ -1,7 +1,7 @@
-package com.example.helloworld.health;
+package com.bryobone.graben.health;
 
 import com.codahale.metrics.health.HealthCheck;
-import com.example.helloworld.core.Template;
+import com.bryobone.graben.core.Template;
 import com.google.common.base.Optional;
 
 public class TemplateHealthCheck extends HealthCheck {

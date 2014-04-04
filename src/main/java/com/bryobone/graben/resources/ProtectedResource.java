@@ -1,6 +1,6 @@
-package com.example.helloworld.resources;
+package com.bryobone.graben.resources;
 
-import com.example.helloworld.core.User;
+import com.bryobone.graben.core.User;
 import io.dropwizard.auth.Auth;
 
 import javax.ws.rs.GET;

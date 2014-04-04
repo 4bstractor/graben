@@ -1,4 +1,4 @@
-package com.example.helloworld.core;
+package com.bryobone.graben.core;
 
 import com.google.common.base.Optional;
 

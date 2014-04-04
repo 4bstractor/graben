@@ -1,6 +1,6 @@
-package com.example.helloworld.views;
+package com.bryobone.graben.views;
 
-import com.example.helloworld.core.Person;
+import com.bryobone.graben.core.Person;
 
 import io.dropwizard.views.View;
 
