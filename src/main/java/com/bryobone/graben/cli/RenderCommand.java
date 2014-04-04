@@ -1,6 +1,6 @@
 package com.bryobone.graben.cli;
 
-import com.bryobone.graben.HelloWorldConfiguration;
+import com.bryobone.graben.GrabenConfiguration;
 import com.bryobone.graben.core.Template;
 import com.google.common.base.Optional;
 import io.dropwizard.cli.ConfiguredCommand;
@@ -11,7 +11,7 @@ import net.sourceforge.argparse4j.inf.Subparser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RenderCommand extends ConfiguredCommand<HelloWorldConfiguration> {
+public class RenderCommand extends ConfiguredCommand<GrabenConfiguration> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RenderCommand.class);
 
     public RenderCommand() {
@@ -29,9 +29,9 @@ public class RenderCommand extends ConfiguredCommand<HelloWorldConfiguration> {
     }
 
     @Override
-    protected void run(Bootstrap<HelloWorldConfiguration> bootstrap,
+    protected void run(Bootstrap<GrabenConfiguration> bootstrap,
                        Namespace namespace,
-                       HelloWorldConfiguration configuration) throws Exception {
+                       GrabenConfiguration configuration) throws Exception {
         final Template template = configuration.buildTemplate();
 
         if (namespace.getBoolean("include-default")) {

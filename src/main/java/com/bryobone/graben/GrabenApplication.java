@@ -17,31 +17,31 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
 
-public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
+public class GrabenApplication extends Application<GrabenConfiguration> {
     public static void main(String[] args) throws Exception {
-        new HelloWorldApplication().run(args);
+        new GrabenApplication().run(args);
     }
 
-    private final HibernateBundle<HelloWorldConfiguration> hibernateBundle =
-            new HibernateBundle<HelloWorldConfiguration>(Person.class) {
+    private final HibernateBundle<GrabenConfiguration> hibernateBundle =
+            new HibernateBundle<GrabenConfiguration>(Person.class) {
                 @Override
-                public DataSourceFactory getDataSourceFactory(HelloWorldConfiguration configuration) {
+                public DataSourceFactory getDataSourceFactory(GrabenConfiguration configuration) {
                     return configuration.getDataSourceFactory();
                 }
             };
 
     @Override
     public String getName() {
-        return "hello-world";
+        return "graben-core";
     }
 
     @Override
-    public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
+    public void initialize(Bootstrap<GrabenConfiguration> bootstrap) {
         bootstrap.addCommand(new RenderCommand());
         bootstrap.addBundle(new AssetsBundle());
-        bootstrap.addBundle(new MigrationsBundle<HelloWorldConfiguration>() {
+        bootstrap.addBundle(new MigrationsBundle<GrabenConfiguration>() {
             @Override
-            public DataSourceFactory getDataSourceFactory(HelloWorldConfiguration configuration) {
+            public DataSourceFactory getDataSourceFactory(GrabenConfiguration configuration) {
                 return configuration.getDataSourceFactory();
             }
         });
@@ -50,7 +50,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     }
 
     @Override
-    public void run(HelloWorldConfiguration configuration,
+    public void run(GrabenConfiguration configuration,
                     Environment environment) throws ClassNotFoundException {
         final PersonDAO dao = new PersonDAO(hibernateBundle.getSessionFactory());
         final Template template = configuration.buildTemplate();

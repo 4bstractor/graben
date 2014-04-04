@@ -55,7 +55,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>com.bryobone.graben.HelloWorldApplication</mainClass>
+                  <mainClass>com.bryobone.graben.GrabenApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>
