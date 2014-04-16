@@ -13,6 +13,6 @@ import javax.ws.rs.core.MediaType;
 public class ProtectedResource {
     @GET
     public String showSecret(@Auth User user) {
-        return String.format("Hey there, %s. You know the secret!", user.getName());
+        return String.format("Hey there, %s. You know the secret!", user.getUsername());
     }
 }

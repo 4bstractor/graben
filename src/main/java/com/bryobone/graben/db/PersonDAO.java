@@ -8,9 +8,7 @@ import org.hibernate.SessionFactory;
 import java.util.List;
 
 public class PersonDAO extends AbstractDAO<Person> {
-    public PersonDAO(SessionFactory factory) {
-        super(factory);
-    }
+    public PersonDAO(SessionFactory factory) { super(factory); }
 
     public Optional<Person> findById(Long id) {
         return Optional.fromNullable(get(id));
