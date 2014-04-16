@@ -1,6 +1,11 @@
 package com.bryobone.graben.core;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 @Entity
 @Table(name = "users")
@@ -14,12 +19,18 @@ import javax.persistence.*;
     query = "SELECT u FROM User u WHERE u.id = :id"
   ),
   @NamedQuery(
-    name = "com.bryobone.graben.core.User.checkUser",
-    query = "SELECT u FROM User u WHERE u.username = :username AND u.hashed_password = :password"
+    name = "com.bryobone.graben.core.User.findByUsername",
+    query = "SELECT u FROM User u WHERE u.username = :username"
+  ),
+  @NamedQuery(
+    name = "com.bryobone.graben.core.User.authenticate",
+    query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password"
   )
 })
 
 public class User {
+  private static final Logger LOGGER = LoggerFactory.getLogger(User.class);
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
@@ -30,12 +41,13 @@ public class User {
   @Column(name = "email", nullable = false)
   private String email;
 
-  @Column(name = "hashed_password", nullable = false)
-  private String hashed_password;
+  @Column(name = "password", nullable = false)
+  private String password;
 
   @Column(name = "salt", nullable = false)
   private String salt;
 
+  // These need to be created and triggered accordingly
   @Column(name = "created_at", nullable = false)
   private String created_at;
 
@@ -66,5 +78,20 @@ public class User {
     this.email = email;
   }
 
-  //Password stuff
+  public String getPassword() { return password; }
+
+  // Make this hash the password on save and generate a salt
+  public void setPassword(String unhashed_password) {
+    try {
+      this.password = hashPassword(unhashed_password);
+    } catch(NoSuchAlgorithmException e) {
+      LOGGER.error("Undefined algorithm used, super duper error here, no password is saved");
+    }
+  }
+
+  private String hashPassword(String unhashed_password) throws NoSuchAlgorithmException {
+    MessageDigest hashed_password = MessageDigest.getInstance("SHA-256");
+    hashed_password.update(unhashed_password.getBytes());
+    return new String(hashed_password.digest());
+  }
 }

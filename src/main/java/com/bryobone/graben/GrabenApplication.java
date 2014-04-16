@@ -27,16 +27,16 @@ public class GrabenApplication extends Application<GrabenConfiguration> {
       new GrabenApplication().run(args);
   }
 
-  private final HibernateBundle<GrabenConfiguration> personHibernateBundle =
-          new HibernateBundle<GrabenConfiguration>(Person.class) {
+  private final HibernateBundle<GrabenConfiguration> userHibernateBundle =
+          new HibernateBundle<GrabenConfiguration>(User.class) {
             @Override
             public DataSourceFactory getDataSourceFactory(GrabenConfiguration configuration) {
               return configuration.getDataSourceFactory();
             }
           };
 
-  private final HibernateBundle<GrabenConfiguration> userHibernateBundle =
-          new HibernateBundle<GrabenConfiguration>(User.class) {
+  private final HibernateBundle<GrabenConfiguration> personHibernateBundle =
+          new HibernateBundle<GrabenConfiguration>(Person.class) {
             @Override
             public DataSourceFactory getDataSourceFactory(GrabenConfiguration configuration) {
               return configuration.getDataSourceFactory();
@@ -77,12 +77,12 @@ public class GrabenApplication extends Application<GrabenConfiguration> {
     environment.jersey().register(new PeopleResource(dao));
     environment.jersey().register(new PersonResource(dao));
 
-    CachingAuthenticator<BasicCredentials, Boolean> authenticator = new CachingAuthenticator<BasicCredentials, Boolean>(
+    CachingAuthenticator<BasicCredentials, User> authenticator = new CachingAuthenticator<BasicCredentials, User>(
       environment.metrics(),
       new GrabenAuthenticator(userDao),
       CacheBuilderSpec.parse(configuration.getCacheBuilderArgs())
     );
 
-    environment.jersey().register(new BasicAuthProvider<Boolean>(authenticator, "Web Service Realm"));
+    environment.jersey().register(new BasicAuthProvider<User>(authenticator, "Web Service Realm"));
   }
 }
