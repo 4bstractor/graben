@@ -18,8 +18,8 @@ public class GrabenAuthenticator implements Authenticator<BasicCredentials, User
   @Override
   public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException {
     User validUser = userDao.findByUsername(credentials.getUsername());
-    LOGGER.info("User {} Logged Id", validUser.getEmail());
-    if (validUser.getPassword().equals(credentials.getPassword())) {
+    if (validUser.verifyPassword(credentials.getPassword())) {
+      LOGGER.info("User {} Logged Id", validUser.getEmail());
       return Optional.fromNullable(validUser);
     }
     return Optional.absent();

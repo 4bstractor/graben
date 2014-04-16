@@ -1,5 +1,7 @@
 package com.bryobone.graben.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,7 +10,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 @Entity
-@Table(name = "users")
+@Table(
+  name = "users",
+  uniqueConstraints = @UniqueConstraint(columnNames = {"username", "email"})
+)
 @NamedQueries({
   @NamedQuery(
     name = "com.bryobone.graben.core.User.findAll",
@@ -41,26 +46,24 @@ public class User {
   @Column(name = "email", nullable = false)
   private String email;
 
+  @Column(name = "created_at", nullable = false)
+  private long created_at = System.currentTimeMillis();
+
+  @Column(name = "updated_at", nullable = false)
+  private long updated_at = System.currentTimeMillis();
+
+  @JsonIgnore
   @Column(name = "password", nullable = false)
   private String password;
 
-  @Column(name = "salt", nullable = false)
-  private String salt;
+  @JsonProperty
+  @JsonIgnore
+  @Transient
+  private String password_confirmation;
 
-  // These need to be created and triggered accordingly
-  @Column(name = "created_at", nullable = false)
-  private String created_at;
+  // Attribute Handling
 
-  @Column(name = "updated_at", nullable = false)
-  private String updated_at;
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
+  public long getId() { return id; }
 
   public String getUsername() {
     return username;
@@ -74,9 +77,24 @@ public class User {
     return email;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void setEmail(String email) { this.email = email; }
+
+  // Timestamp Handling
+
+  public long getCreatedAt() { return created_at; }
+
+  public void setCreatedAt() { this.created_at = System.currentTimeMillis(); }
+
+  public long getUpdatedAt() { return created_at; }
+
+  public void setUpdatedAt() { this.created_at = System.currentTimeMillis(); }
+
+  public void setTimestamps() {
+    this.setCreatedAt();
+    this.setUpdatedAt();
   }
+
+  // Password Handling
 
   public String getPassword() { return password; }
 
@@ -87,6 +105,15 @@ public class User {
     } catch(NoSuchAlgorithmException e) {
       LOGGER.error("Undefined algorithm used, super duper error here, no password is saved");
     }
+  }
+
+  public boolean verifyPassword(String password) {
+    try {
+      return this.getPassword().equals(hashPassword(password));
+    } catch (NoSuchAlgorithmException e) {
+      LOGGER.error("Undefined algorithm used, can't compare passwords");
+    }
+    return false;
   }
 
   private String hashPassword(String unhashed_password) throws NoSuchAlgorithmException {

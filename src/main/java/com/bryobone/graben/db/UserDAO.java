@@ -6,8 +6,6 @@ import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
-import java.util.List;
-
 /**
  * Created by jarvis on 4/8/14.
  */
@@ -19,11 +17,9 @@ public class UserDAO extends AbstractDAO<User> {
   }
 
   public User create(User user) {
+    // Check user deets
+    user.setTimestamps();
     return persist(user);
-  }
-
-  public List<User> findAll() {
-    return list(namedQuery("com.bryobone.graben.core.User.findAll"));
   }
 
   public User findByUsername(String username) {

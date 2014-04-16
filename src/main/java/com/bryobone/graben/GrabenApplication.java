@@ -65,7 +65,7 @@ public class GrabenApplication extends Application<GrabenConfiguration> {
 
   @Override
   public void run(GrabenConfiguration configuration, Environment environment) throws ClassNotFoundException {
-    final PersonDAO dao = new PersonDAO(personHibernateBundle.getSessionFactory());
+    final PersonDAO personDao = new PersonDAO(personHibernateBundle.getSessionFactory());
     final UserDAO userDao = new UserDAO(userHibernateBundle.getSessionFactory());
     final Template template = configuration.buildTemplate();
 
@@ -74,8 +74,9 @@ public class GrabenApplication extends Application<GrabenConfiguration> {
     environment.jersey().register(new HelloWorldResource(template));
     environment.jersey().register(new ViewResource());
     environment.jersey().register(new ProtectedResource());
-    environment.jersey().register(new PeopleResource(dao));
-    environment.jersey().register(new PersonResource(dao));
+    environment.jersey().register(new PeopleResource(personDao));
+    environment.jersey().register(new PersonResource(personDao));
+    environment.jersey().register(new UserResource(userDao));
 
     CachingAuthenticator<BasicCredentials, User> authenticator = new CachingAuthenticator<BasicCredentials, User>(
       environment.metrics(),

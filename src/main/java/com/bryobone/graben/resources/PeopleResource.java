@@ -1,7 +1,9 @@
 package com.bryobone.graben.resources;
 
 import com.bryobone.graben.core.Person;
+import com.bryobone.graben.core.User;
 import com.bryobone.graben.db.PersonDAO;
+import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.GET;
@@ -29,7 +31,7 @@ public class PeopleResource {
 
     @GET
     @UnitOfWork
-    public List<Person> listPeople() {
+    public List<Person> listPeople(@Auth User user) {
         return peopleDAO.findAll();
     }
 
