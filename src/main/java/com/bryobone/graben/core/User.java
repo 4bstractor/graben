@@ -35,6 +35,8 @@ import java.security.NoSuchAlgorithmException;
 public class User {
   private static final Logger LOGGER = LoggerFactory.getLogger(User.class);
 
+  public User() {}
+
   public User(String username, String email, String password) {
     this.setUsername(username);
     this.setEmail(email);
