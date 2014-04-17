@@ -2,7 +2,6 @@ package com.bryobone.graben.resources;
 
 import com.bryobone.graben.core.Person;
 import com.bryobone.graben.db.PersonDAO;
-import com.bryobone.graben.views.PersonView;
 import com.google.common.base.Optional;
 import com.sun.jersey.api.NotFoundException;
 import io.dropwizard.hibernate.UnitOfWork;
@@ -37,20 +36,4 @@ public class PersonResource {
         }
 		return person.get();
 	}
-
-    @GET
-    @Path("/view_freemarker")
-    @UnitOfWork
-    @Produces(MediaType.TEXT_HTML)
-    public PersonView getPersonViewFreemarker(@PathParam("personId") LongParam personId) {
-        return new PersonView(PersonView.Template.FREEMARKER, findSafely(personId.get()));
-    }
-    
-    @GET
-    @Path("/view_mustache")
-    @UnitOfWork
-    @Produces(MediaType.TEXT_HTML)
-    public PersonView getPersonViewMustache(@PathParam("personId") LongParam personId) {
-    	return new PersonView(PersonView.Template.MUSTACHE, findSafely(personId.get()));    
-    }
 }

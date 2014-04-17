@@ -20,7 +20,6 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import io.dropwizard.views.ViewBundle;
 
 public class GrabenApplication extends Application<GrabenConfiguration> {
   public static void main(String[] args) throws Exception {
@@ -60,7 +59,6 @@ public class GrabenApplication extends Application<GrabenConfiguration> {
     });
     bootstrap.addBundle(personHibernateBundle);
     bootstrap.addBundle(userHibernateBundle);
-    bootstrap.addBundle(new ViewBundle());
   }
 
   @Override
@@ -71,9 +69,6 @@ public class GrabenApplication extends Application<GrabenConfiguration> {
 
     environment.healthChecks().register("template", new TemplateHealthCheck(template));
 
-    environment.jersey().register(new HelloWorldResource(template));
-    environment.jersey().register(new ViewResource());
-    environment.jersey().register(new ProtectedResource());
     environment.jersey().register(new PeopleResource(personDao));
     environment.jersey().register(new PersonResource(personDao));
     environment.jersey().register(new UserResource(userDao));
