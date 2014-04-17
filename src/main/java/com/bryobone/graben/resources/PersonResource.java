@@ -17,23 +17,23 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class PersonResource {
 
-    private final PersonDAO peopleDAO;
+  private final PersonDAO peopleDAO;
 
-    public PersonResource(PersonDAO peopleDAO) {
-        this.peopleDAO = peopleDAO;
-    }
+  public PersonResource(PersonDAO peopleDAO) {
+      this.peopleDAO = peopleDAO;
+  }
 
-    @GET
-    @UnitOfWork
-    public Person getPerson(@PathParam("personId") LongParam personId) {
-        return findSafely(personId.get());
-    }
+  @GET
+  @UnitOfWork
+  public Person getPerson(@PathParam("personId") LongParam personId) {
+      return findSafely(personId.get());
+  }
 
 	private Person findSafely(long personId) {
 		final Optional<Person> person = peopleDAO.findById(personId);
-        if (!person.isPresent()) {
-            throw new NotFoundException("No such user.");
-        }
+      if (!person.isPresent()) {
+        throw new NotFoundException("No such user.");
+      }
 		return person.get();
 	}
 }

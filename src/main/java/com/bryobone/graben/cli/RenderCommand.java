@@ -12,37 +12,37 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RenderCommand extends ConfiguredCommand<GrabenConfiguration> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RenderCommand.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(RenderCommand.class);
 
-    public RenderCommand() {
-        super("render", "Render the template data to console");
-    }
+  public RenderCommand() {
+      super("render", "Render the template data to console");
+  }
 
-    @Override
-    public void configure(Subparser subparser) {
-        super.configure(subparser);
-        subparser.addArgument("-i", "--include-default")
-                 .action(Arguments.storeTrue())
-                 .dest("include-default")
-                 .help("Also render the template with the default name");
-        subparser.addArgument("names").nargs("*");
-    }
+  @Override
+  public void configure(Subparser subparser) {
+    super.configure(subparser);
+    subparser.addArgument("-i", "--include-default")
+             .action(Arguments.storeTrue())
+             .dest("include-default")
+             .help("Also render the template with the default name");
+    subparser.addArgument("names").nargs("*");
+  }
 
     @Override
     protected void run(Bootstrap<GrabenConfiguration> bootstrap,
                        Namespace namespace,
                        GrabenConfiguration configuration) throws Exception {
-        final Template template = configuration.buildTemplate();
+      final Template template = configuration.buildTemplate();
 
-        if (namespace.getBoolean("include-default")) {
-            LOGGER.info("DEFAULT => {}", template.render(Optional.<String>absent()));
-        }
+      if (namespace.getBoolean("include-default")) {
+        LOGGER.info("DEFAULT => {}", template.render(Optional.<String>absent()));
+      }
 
-        for (String name : namespace.<String>getList("names")) {
-            for (int i = 0; i < 1000; i++) {
-                LOGGER.info("{} => {}", name, template.render(Optional.of(name)));
-                Thread.sleep(1000);
-            }
+      for (String name : namespace.<String>getList("names")) {
+        for (int i = 0; i < 1000; i++) {
+          LOGGER.info("{} => {}", name, template.render(Optional.of(name)));
+          Thread.sleep(1000);
         }
+      }
     }
 }
