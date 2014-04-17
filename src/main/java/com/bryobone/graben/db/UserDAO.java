@@ -17,8 +17,6 @@ public class UserDAO extends AbstractDAO<User> {
   }
 
   public User create(User user) {
-    // Check user deets
-    user.setTimestamps();
     return persist(user);
   }
 

@@ -1,7 +1,6 @@
 package com.bryobone.graben.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +35,12 @@ import java.security.NoSuchAlgorithmException;
 public class User {
   private static final Logger LOGGER = LoggerFactory.getLogger(User.class);
 
+  public User(String username, String email, String password) {
+    this.setUsername(username);
+    this.setEmail(email);
+    this.setPassword(password);
+  }
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
@@ -55,11 +60,6 @@ public class User {
   @JsonIgnore
   @Column(name = "password", nullable = false)
   private String password;
-
-  @JsonProperty
-  @JsonIgnore
-  @Transient
-  private String password_confirmation;
 
   // Attribute Handling
 
@@ -88,11 +88,6 @@ public class User {
   public long getUpdatedAt() { return created_at; }
 
   public void setUpdatedAt() { this.created_at = System.currentTimeMillis(); }
-
-  public void setTimestamps() {
-    this.setCreatedAt();
-    this.setUpdatedAt();
-  }
 
   // Password Handling
 
