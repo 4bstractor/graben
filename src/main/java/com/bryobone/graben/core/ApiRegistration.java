@@ -5,7 +5,7 @@ package com.bryobone.graben.core;
  */
 
 //TODO: Move this and the other wrappers to a sub package perhaps
-// A Wrapper for the user class to provide convenience methods for api login and session management
+// A Wrapper for the user class to provide convenience methods for api registration
 
 public class ApiRegistration {
   public String username;

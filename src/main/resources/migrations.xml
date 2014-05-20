@@ -42,20 +42,6 @@
     </changeSet>
 
     <changeSet id="3" author="4bstractor">
-        <createTable tableName="api_keys">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="key" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="secret" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="school_id" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
         <createTable tableName="access_tokens">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -64,9 +50,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="user_id" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="api_key_id" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
