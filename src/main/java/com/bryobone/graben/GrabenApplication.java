@@ -2,14 +2,15 @@ package com.bryobone.graben;
 
 import com.bryobone.graben.auth.GrabenAuthenticator;
 import com.bryobone.graben.cli.RenderCommand;
-import com.bryobone.graben.core.Person;
+import com.bryobone.graben.core.School;
 import com.bryobone.graben.core.Template;
 import com.bryobone.graben.core.User;
-import com.bryobone.graben.db.PersonDAO;
+import com.bryobone.graben.db.SchoolDAO;
 import com.bryobone.graben.db.UserDAO;
 import com.bryobone.graben.health.TemplateHealthCheck;
-import com.bryobone.graben.resources.PeopleResource;
-import com.bryobone.graben.resources.PersonResource;
+import com.bryobone.graben.resources.SchoolResource;
+import com.bryobone.graben.resources.SchoolsResource;
+import com.bryobone.graben.resources.SessionResource;
 import com.bryobone.graben.resources.UserResource;
 import com.google.common.cache.CacheBuilderSpec;
 import io.dropwizard.Application;
@@ -36,8 +37,8 @@ public class GrabenApplication extends Application<GrabenConfiguration> {
             }
           };
 
-  private final HibernateBundle<GrabenConfiguration> personHibernateBundle =
-          new HibernateBundle<GrabenConfiguration>(Person.class) {
+  private final HibernateBundle<GrabenConfiguration> schoolHibernateBundle =
+          new HibernateBundle<GrabenConfiguration>(School.class) {
             @Override
             public DataSourceFactory getDataSourceFactory(GrabenConfiguration configuration) {
               return configuration.getDataSourceFactory();
@@ -59,20 +60,21 @@ public class GrabenApplication extends Application<GrabenConfiguration> {
       return configuration.getDataSourceFactory();
         }
     });
-    bootstrap.addBundle(personHibernateBundle);
+    bootstrap.addBundle(schoolHibernateBundle);
     bootstrap.addBundle(userHibernateBundle);
   }
 
   @Override
   public void run(GrabenConfiguration configuration, Environment environment) throws ClassNotFoundException {
-    final PersonDAO personDao = new PersonDAO(personHibernateBundle.getSessionFactory());
+    final SchoolDAO schoolDao = new SchoolDAO(schoolHibernateBundle.getSessionFactory());
     final UserDAO userDao = new UserDAO(userHibernateBundle.getSessionFactory());
     final Template template = configuration.buildTemplate();
 
     environment.healthChecks().register("template", new TemplateHealthCheck(template));
 
-    environment.jersey().register(new PeopleResource(personDao));
-    environment.jersey().register(new PersonResource(personDao));
+    environment.jersey().register(new SchoolResource(schoolDao));
+    environment.jersey().register(new SchoolsResource(schoolDao));
+    environment.jersey().register(new SessionResource(userDao));
     environment.jersey().register(new UserResource(userDao));
 
     CachingAuthenticator<BasicCredentials, User> authenticator = new CachingAuthenticator<BasicCredentials, User>(
