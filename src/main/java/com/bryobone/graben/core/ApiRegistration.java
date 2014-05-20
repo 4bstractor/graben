@@ -3,11 +3,17 @@ package com.bryobone.graben.core;
 /**
  * Created by jarvis on 4/17/14.
  */
-public class UserParams {
+
+//TODO: Move this and the other wrappers to a sub package perhaps
+// A Wrapper for the user class to provide convenience methods for api login and session management
+
+public class ApiRegistration {
   public String username;
   public String email;
   public String password;
   public String password_confirmation;
+  public String api_key;
+  public String api_secret;
 
   public String getUsername() {
     return username;
