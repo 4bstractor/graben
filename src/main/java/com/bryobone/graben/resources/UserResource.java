@@ -1,7 +1,7 @@
 package com.bryobone.graben.resources;
 
 import com.bryobone.graben.core.User;
-import com.bryobone.graben.core.UserParams;
+import com.bryobone.graben.core.ApiRegistration;
 import com.bryobone.graben.db.UserDAO;
 import io.dropwizard.hibernate.UnitOfWork;
 import org.slf4j.Logger;
@@ -24,7 +24,7 @@ public class UserResource {
 
   @POST
   @UnitOfWork //Create a UserParams Mask for this information
-  public User createUser(UserParams userParams) {
+  public User createUser(ApiRegistration userParams) {
     LOGGER.info("User params: {}", userParams.getUsername());
     // Check password confirmation is equal to password
     // Validate user
