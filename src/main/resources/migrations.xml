@@ -54,4 +54,18 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet id="4" author="4bstractor">
+        <dropColumn tableName="access_tokens" columnName="user_id"/>
+        <addColumn tableName="users">
+            <column name="uuid" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addColumn tableName="access_tokens">
+            <column name="user_uuid" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
